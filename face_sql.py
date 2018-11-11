@@ -7,7 +7,6 @@ recognizer.read('trainner/trainner.yml')
 cascadePath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath);
 
-
 cam = cv2.VideoCapture(0)
 #font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_SIMPLEX, 1, 1, 0, 1, 1)
 font = cv2.FONT_HERSHEY_SIMPLEX

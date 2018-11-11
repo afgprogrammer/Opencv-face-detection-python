@@ -1,5 +1,9 @@
 import cv2
-import numpy as np
+import sqlite3
+import uuid
+
+connect = sqlite3.connect('SQL/sql.db')
+cur = connect.cursor()
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
@@ -12,10 +16,13 @@ while True:
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     for (x, y, w, h) in faces:
         nums = nums+1
-        cv2.imwrite("dataSet/User."+str(id)+"."+str(nums)+".jpg", gray[y:y+h,x:x+w])
+        cv2.imwrite("dataSet/"+str(id)+"."+str(nums)+".jpg", gray[y:y+h,x:x+w])
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
         cv2.waitKey(100)
 
+    cur.execute('INSERT INTO user (name, id) VALUES (' + id +','+ str(uuid.uuid4()) +')')
+    connect.commit()
+    connect.close()
     cv2.imshow('img', img)
     k = cv2.waitKey(1)
     if nums>20:
