@@ -1,7 +1,10 @@
-import cv2
-import numpy as np
+import cv2, time, pandas
+from datetime import  datetime
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+first_frame = None
+status_list = [None, None]
+times = []
+df=pandas.DataFrame()
 
 cap = cv2.VideoCapture(0)
 
